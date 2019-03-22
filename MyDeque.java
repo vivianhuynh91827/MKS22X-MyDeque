@@ -24,6 +24,7 @@ public class MyDeque<E> {
 
   public String toString() {
     String s = "{";
+    if (size == 0) return "{}";
     if (start < end) { // if the start is before the end
       for (int i = start; i < size; i++) {
         s+=data[i] + " ";
@@ -48,6 +49,11 @@ public class MyDeque<E> {
   }
 
   public void addLast(E element) {
+
+  }
+
+  private E[] resize() {
+    E[] resized = (E[])new Object[size * 2];
 
   }
 
