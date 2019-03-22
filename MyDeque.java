@@ -17,7 +17,24 @@ public class MyDeque<E> {
   }
 
   public String toString() {
-    return "";
+    String s = "[";
+    if (start < end) { // if the start is before the end
+      for (int i = start; i < size; i++) {
+        s+=data[i] + ", ";
+      }
+    }
+    else { // if the list loops around to the front
+      for (int i = start; i < data.length; i ++) {
+        s+=data[i] + ", ";
+      }
+      int i = 0;
+      while (i != end) {
+        s+=data[i] + ", ";
+      }
+    }
+    s = s.substring(0, s.length()-2);
+    s += "]";
+    return s;
   }
 
   public void addFirst(E element) {
