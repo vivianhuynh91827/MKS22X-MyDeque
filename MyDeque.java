@@ -53,8 +53,29 @@ public class MyDeque<E> {
   }
 
   private E[] resize() {
+    @SuppressWarnings("unchecked")
     E[] resized = (E[])new Object[size * 2];
-
+    if (start < end) { //if the start is before the end
+      for (int i = 0 ; i < size; i ++) {
+        resized[i] = data[start+i];
+      }
+    }
+    else {
+      int i = 0;
+      int cur = start;
+      while (cur < data.length) {
+        resized[i] = data[cur];
+        cur++;
+        i++;
+      }
+      cur = 0;
+      while (cur != end) {
+        resized[i] = data[cur];
+        cur++;
+        i++;
+      }
+    }
+    return resized;
   }
 
   // public E removeFirst(){
