@@ -45,7 +45,21 @@ public class MyDeque<E> {
   }
 
   public void addFirst(E element) {
-
+    //if start is at the beginning and there is space at the end of the array
+    if (start == 0 && data[data.length-1] == null) {
+      start = data.length-1; //start is at the end of the array
+      data[start] = element; //add element
+    }
+    // if the entire array is full or if there is no space behind start, resize and add element
+    else if ((start == 0 && data[data.length-1] != null) || (data[start-1] != null)) {
+      data = resize();
+      start = data.length-1; //add element
+      data[start] = element;
+    }
+    else { //if there is space
+      start--;
+      data[start] = element;
+    }
   }
 
   public void addLast(E element) {
@@ -75,6 +89,7 @@ public class MyDeque<E> {
         i++;
       }
     }
+    System.out.println("New Length: " + resized.length);
     return resized;
   }
 
@@ -92,5 +107,10 @@ public class MyDeque<E> {
 
   public E getLast() {
     return data[end];
+  }
+
+  public static void main(String[] args) {
+    MyDeque<Integer> test = new MyDeque<>();
+    test.resize();
   }
 }
