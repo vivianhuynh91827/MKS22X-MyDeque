@@ -5,11 +5,17 @@ public class MyDeque<E> {
   @SuppressWarnings("unchecked")
   public MyDeque() {
     data = (E[])new Object[10];
+    size = 0;
+    start = 0;
+    end = 0;
   }
 
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity) {
     data = (E[])new Object[initialCapacity];
+    size = 0;
+    start = 0;
+    end = 0;
   }
 
   public int size() {
@@ -17,23 +23,23 @@ public class MyDeque<E> {
   }
 
   public String toString() {
-    String s = "[";
+    String s = "{";
     if (start < end) { // if the start is before the end
       for (int i = start; i < size; i++) {
-        s+=data[i] + ", ";
+        s+=data[i] + " ";
       }
     }
     else { // if the list loops around to the front
       for (int i = start; i < data.length; i ++) {
-        s+=data[i] + ", ";
+        s+=data[i] + " ";
       }
       int i = 0;
       while (i != end) {
-        s+=data[i] + ", ";
+        s+=data[i] + " ";
       }
     }
     s = s.substring(0, s.length()-2);
-    s += "]";
+    s += "}";
     return s;
   }
 
