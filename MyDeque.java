@@ -15,6 +15,9 @@ public class MyDeque<E> {
 
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity) {
+    // if (initialCapacity <= 0) {
+    //   throw new
+    // }
     data = (E[])new Object[initialCapacity];
     size = 0;
     start = 0;
@@ -88,11 +91,15 @@ public class MyDeque<E> {
       end = 0;
       data[end] = element;
     }
+    // if end is last in the array  and there is not spaces in the beginning
+    // of if end is in the middle of the array and there is not space after
+    // resize and add element
     else if ((end == data.length - 1 && data [0] != null) || (data[end + 1] != null)) {
       data = resize();
       end = size;
       data[end]= element;
     }
+    // if end is in the middle of the array and there is space
     else {
       end++;
       data[end] = element;
@@ -102,13 +109,13 @@ public class MyDeque<E> {
 
   private E[] resize() {
     @SuppressWarnings("unchecked")
-    E[] resized = (E[])new Object[size * 2];
-    int oldStart = start;
+    E[] resized = (E[])new Object[size * 2]; //create new array
+    int oldStart = start; //store start and end for the original data
     int oldEnd = end;
-    start = 0;
+    start = 0; //new start and end values in resized array
     end = size-1;
     // System.out.println("end: " +end);
-    if (oldStart < oldEnd) { //if the start is before the end
+    if (oldStart <= oldEnd) { //if the start is before the end
       for (int i = 0 ; i < size; i ++) {
         resized[i] = data[oldStart+i];
       }
@@ -121,7 +128,7 @@ public class MyDeque<E> {
       }
       cur++;
       int i = 0;
-      while (i != oldEnd) {
+      while (i <= oldEnd) {
         resized[cur] = data[i];
         cur++;
         i++;
@@ -170,7 +177,7 @@ public class MyDeque<E> {
     System.out.println(test);
     // test.addFirst(9);
     // test.addFirst(10);
-    // test.addFirst(11);
+    // // test.addFirst(11);
     test.addLast(0);
     System.out.println(test);
     test.addLast(-1);
@@ -183,10 +190,10 @@ public class MyDeque<E> {
     System.out.println(test);
     test.addLast(-5);
     System.out.println(test);
-    System.out.println();
-    System.out.println("size: " +test.size());
-    System.out.println("First: " + test.getFirst());
-    System.out.println("Last: " + test.getLast());
-    System.out.println(test);
+    // System.out.println();
+    // System.out.println("size: " +test.size());
+    // System.out.println("First: " + test.getFirst());
+    // System.out.println("Last: " + test.getLast());
+    // System.out.println(test);
   }
 }
