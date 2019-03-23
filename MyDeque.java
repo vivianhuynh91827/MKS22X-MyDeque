@@ -15,9 +15,9 @@ public class MyDeque<E> {
 
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity) {
-    // if (initialCapacity <= 0) {
-    //   throw new
-    // }
+    if (initialCapacity <= 0) {
+      throw new IllegalArgumentException("initialCapacity must be greater than 0");
+    }
     data = (E[])new Object[initialCapacity];
     size = 0;
     start = 0;
@@ -57,6 +57,9 @@ public class MyDeque<E> {
   }
 
   public void addFirst(E element) {
+    if (element == null) {
+      throw new IllegalArgumentException("null cannot be added");
+    }
     // System.out.println(element);
     //if start is at the beginning and there is space at the end of the array
     if (start == 0 && data[data.length-1] == null) {
@@ -86,6 +89,9 @@ public class MyDeque<E> {
   }
 
   public void addLast(E element) {
+    if (element == null) {
+      throw new IllegalArgumentException("null cannot be added");
+    }
     //if end is at the end of the array and there is space in the beginning of the array
     if (end == data.length -1 && data[0] == null) {
       end = 0;
@@ -158,42 +164,47 @@ public class MyDeque<E> {
   }
 
   public static void main(String[] args) {
-    MyDeque<Integer> test = new MyDeque<>();
-    test.addFirst(1);
-    System.out.println(test);
-    test.addFirst(2);
-    System.out.println(test);
-    test.addFirst(3);
-    System.out.println(test);
-    test.addFirst(4);
-    System.out.println(test);
-    test.addFirst(5);
-    System.out.println(test);
-    test.addFirst(6);
-    System.out.println(test);
-    test.addFirst(7);
-    System.out.println(test);
-    test.addFirst(8);
-    System.out.println(test);
-    // test.addFirst(9);
-    // test.addFirst(10);
-    // // test.addFirst(11);
-    test.addLast(0);
-    System.out.println(test);
-    test.addLast(-1);
-    System.out.println(test);
-    test.addLast(-2);
-    System.out.println(test);
-    test.addLast(-3);
-    System.out.println(test);
-    test.addLast(-4);
-    System.out.println(test);
-    test.addLast(-5);
-    System.out.println(test);
-    // System.out.println();
-    // System.out.println("size: " +test.size());
-    // System.out.println("First: " + test.getFirst());
-    // System.out.println("Last: " + test.getLast());
-    // System.out.println(test);
+    try {
+      MyDeque<Integer> test = new MyDeque<>();
+      test.addFirst(1);
+      System.out.println(test);
+      test.addFirst(2);
+      System.out.println(test);
+      test.addFirst(3);
+      System.out.println(test);
+      test.addFirst(4);
+      System.out.println(test);
+      test.addFirst(5);
+      System.out.println(test);
+      test.addFirst(6);
+      System.out.println(test);
+      test.addFirst(7);
+      System.out.println(test);
+      test.addFirst(8);
+      System.out.println(test);
+      // test.addFirst(9);
+      // test.addFirst(10);
+      // // test.addFirst(11);
+      test.addLast(0);
+      System.out.println(test);
+      test.addLast(-1);
+      System.out.println(test);
+      test.addLast(-2);
+      System.out.println(test);
+      test.addLast(-3);
+      System.out.println(test);
+      test.addLast(-4);
+      System.out.println(test);
+      test.addLast(-5);
+      System.out.println(test);
+      // System.out.println();
+      // System.out.println("size: " +test.size());
+      // System.out.println("First: " + test.getFirst());
+      // System.out.println("Last: " + test.getLast());
+      // System.out.println(test);
+    }
+    catch (IllegalArgumentException e) {
+      System.out.println(e);
+    }
   }
 }
