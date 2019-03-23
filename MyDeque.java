@@ -107,7 +107,13 @@ public class MyDeque<E> {
       end++;
       data[end] = element;
     }
+    if (size == 0) {
+      start = end;
+    }
     size++;
+    // System.out.println("end: " + end);
+    // System.out.println("start: "+ start);
+    // System.out.println(Arrays.toString(data));
   }
 
   private E[] resize() {
@@ -152,8 +158,11 @@ public class MyDeque<E> {
     data[start] = null; //remove value
     size--;
 
-    if (size ==0 || size == 1) {
-      //if the resulting size is 0 or 1, set the start equal to end
+    if (size == 0) {
+      start = 0;
+      end = 0;
+    }
+    else if (size == 1) {
       start = end;
     }
     else if (start == data.length-1) {
@@ -175,8 +184,11 @@ public class MyDeque<E> {
     data[end] = null; //remove data
     size --;
 
-    if (size == 0 || size == 1) {
-      //if the resulting size is 0 or 1, set the end equal to start
+    if (size == 0) {
+      start = 0;
+      end = 0;
+    }
+    else if (size == 1) {
       end = start;
     }
     else if (end == 0) {
@@ -190,56 +202,83 @@ public class MyDeque<E> {
   }
 
   public E getFirst(){
+    if (size == 0) {
+      throw new NoSuchElementException();
+    }
     return data[start];
   }
 
   public E getLast() {
+    if (size == 0) {
+      throw new NoSuchElementException();
+    }
     return data[end];
   }
 
-  public static void main(String[] args) {
-    try {
-      MyDeque<Integer> test = new MyDeque<>();
-      test.addFirst(1);
-      System.out.println(test);
-      test.addFirst(2);
-      System.out.println(test);
-      test.addFirst(3);
-      System.out.println(test);
-      test.addFirst(4);
-      System.out.println(test);
-      test.addFirst(5);
-      System.out.println(test);
-      test.addFirst(6);
-      System.out.println(test);
-      test.addFirst(7);
-      System.out.println(test);
-      test.addFirst(8);
-      System.out.println(test);
-      // test.addFirst(9);
-      // test.addFirst(10);
-      // // test.addFirst(11);
-      test.addLast(0);
-      System.out.println(test);
-      test.addLast(-1);
-      System.out.println(test);
-      test.addLast(-2);
-      System.out.println(test);
-      test.addLast(-3);
-      System.out.println(test);
-      test.addLast(-4);
-      System.out.println(test);
-      test.addLast(-5);
-      System.out.println(test);
-      test.addFirst(null);
-      // System.out.println();
-      // System.out.println("size: " +test.size());
-      // System.out.println("First: " + test.getFirst());
-      // System.out.println("Last: " + test.getLast());
-      // System.out.println(test);
-    }
-    catch (IllegalArgumentException e) {
-      System.out.println(e);
-    }
-  }
+  // public static void main(String[] args) {
+  //   try {
+  //     MyDeque<Integer> test = new MyDeque<>();
+  //     // test.addFirst(1);
+  //     // System.out.println(test);
+  //     // test.addFirst(2);
+  //     // System.out.println(test);
+  //     // test.addFirst(3);
+  //     // System.out.println(test);
+  //     // test.addFirst(4);
+  //     // System.out.println(test);
+  //     // test.addFirst(5);
+  //     // System.out.println(test);
+  //     // test.addFirst(6);
+  //     // System.out.println(test);
+  //     // test.addFirst(7);
+  //     // System.out.println(test);
+  //     // test.addFirst(8);
+  //     // System.out.println(test);
+  //     // test.addFirst(9);
+  //     // test.addFirst(10);
+  //     // // test.addFirst(11);
+  //     test.addLast(0);
+  //     System.out.println(test.getFirst());
+  //     System.out.println(test.getLast());
+  //     System.out.println(test);
+  //     System.out.println();
+  //     test.addLast(-1);
+  //     System.out.println(test.getFirst());
+  //     System.out.println(test.getLast());
+  //     System.out.println(test);
+  //     System.out.println();
+  //     test.addLast(-2);
+  //     System.out.println(test.getFirst());
+  //     System.out.println(test.getLast());
+  //     System.out.println(test);
+  //     System.out.println();
+  //     test.addLast(-3);
+  //     System.out.println(test.getFirst());
+  //     System.out.println(test.getLast());
+  //     System.out.println(test);
+  //     System.out.println();
+  //     test.addLast(-4);
+  //     System.out.println(test.getFirst());
+  //     System.out.println(test.getLast());
+  //     System.out.println(test);
+  //     System.out.println();
+  //     test.addLast(-5);
+  //     System.out.println(test.getFirst());
+  //     System.out.println(test.getLast());
+  //     System.out.println(test);
+  //     System.out.println();
+  //     test.addFirst(null);
+  //     // System.out.println();
+  //     // System.out.println("size: " +test.size());
+  //     // System.out.println("First: " + test.getFirst());
+  //     // System.out.println("Last: " + test.getLast());
+  //     // System.out.println(test);
+  //   }
+  //   catch (NullPointerException e) {
+  //     System.out.println(e);
+  //   }
+  //   catch (NoSuchElementException e) {
+  //     System.out.println(e);
+  //   }
+  // }
 }
