@@ -27,25 +27,29 @@ public class MyDeque<E> {
 
   public String toString() {
     String s = "{";
+    // System.out.println(Arrays.toString(data));
     if (size == 0) return "{}";
-    if (start < end) { // if the start is before the end
-      for (int i = start; i < size; i++) {
+    if (start <= end) { // if the start is before the end
+      for (int i = start; i <= end; i++) {
         s+=data[i] + " ";
       }
     }
     else { // if the list loops around to the front
       for (int i = start; i < data.length; i ++) {
-        s+=data[i] + " ";
+        s+=data[i] + " ";//go to the end of the array
       }
       int i = 0;
-      
-      while (i != end + 1) {
+
+      while (i <= end) { //add elements from beginning of array to end
         s+=data[i] + " ";
         i++;
       }
     }
-    s = s.substring(0, s.length()-1);
-    s += "}";
+    s = s.substring(0, s.length()-1); //remove extra space
+    s += "}"; //close lise
+    System.out.println();
+    System.out.println("First: " + getFirst());
+    System.out.println("Last : " + getLast());
     return s;
   }
 
@@ -66,17 +70,34 @@ public class MyDeque<E> {
       start--;
       data[start] = element;
     }
+    if (size == 0) {
+      end = start;
+    }
     size++;
     // System.out.println(Arrays.toString(data));
     // System.out.println("size: " +size);
-    System.out.println();
-    System.out.println("End: " + end);
-    System.out.println("Start: " + start);
-    System.out.println("Size: "+ size);
+    // System.out.println();
+    // System.out.println("End: " + end);
+    // System.out.println("Start: " + start);
+    // System.out.println("Size: "+ size);
   }
 
   public void addLast(E element) {
-
+    //if end is at the end of the array and there is space in the beginning of the array
+    if (end == data.length -1 && data[0] == null) {
+      end = 0;
+      data[end] = element;
+    }
+    else if ((end == data.length - 1 && data [0] != null) || (data[end + 1] != null)) {
+      data = resize();
+      end = size;
+      data[end]= element;
+    }
+    else {
+      end++;
+      data[end] = element;
+    }
+    size++;
   }
 
   private E[] resize() {
@@ -132,17 +153,37 @@ public class MyDeque<E> {
   public static void main(String[] args) {
     MyDeque<Integer> test = new MyDeque<>();
     test.addFirst(1);
+    System.out.println(test);
     test.addFirst(2);
+    System.out.println(test);
     test.addFirst(3);
+    System.out.println(test);
     test.addFirst(4);
+    System.out.println(test);
     test.addFirst(5);
+    System.out.println(test);
     test.addFirst(6);
+    System.out.println(test);
     test.addFirst(7);
+    System.out.println(test);
     test.addFirst(8);
-    test.addFirst(9);
-    test.addFirst(10);
-    test.addFirst(11);
-    System.out.println("hi");
+    System.out.println(test);
+    // test.addFirst(9);
+    // test.addFirst(10);
+    // test.addFirst(11);
+    test.addLast(0);
+    System.out.println(test);
+    test.addLast(-1);
+    System.out.println(test);
+    test.addLast(-2);
+    System.out.println(test);
+    test.addLast(-3);
+    System.out.println(test);
+    test.addLast(-4);
+    System.out.println(test);
+    test.addLast(-5);
+    System.out.println(test);
+    System.out.println();
     System.out.println("size: " +test.size());
     System.out.println("First: " + test.getFirst());
     System.out.println("Last: " + test.getLast());
