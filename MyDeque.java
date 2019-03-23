@@ -145,30 +145,49 @@ public class MyDeque<E> {
   }
 
   public E removeFirst(){
-    if (size == 0) {
+    if (size == 0) { //if the deque is empty
       throw new NoSuchElementException();
     }
-    E value = data[start];
-    data[start] = null;
+    E value = data[start]; //store removed data
+    data[start] = null; //remove value
     size--;
+
     if (size ==0 || size == 1) {
+      //if the resulting size is 0 or 1, set the start equal to end
       start = end;
     }
     else if (start == data.length-1) {
+      //if start was at the end of the array, set start to the beginning of the array
       start = 0;
     }
     else {
+      //else increase start by one
       start ++;
     }
     return value;
   }
 
-  // public E removeLast(){
-  //
-  // if (size == 0) {
-  //   throw new NoSuchElementException("deque is empty");
-  // }
-  // }
+  public E removeLast(){
+    if (size == 0) {
+      throw new NoSuchElementException();
+    }
+    E value = data[end]; //stored removed data
+    data[end] = null; //remove data
+    size --;
+
+    if (size == 0 || size == 1) {
+      //if the resulting size is 0 or 1, set the end equal to start
+      end = start;
+    }
+    else if (end == 0) {
+      //if the end is at the beginning of the array, set end to the end of the array
+      end = data.length-1;
+    }
+    else {
+      end --;
+    }
+    return value;
+  }
 
   public E getFirst(){
     return data[start];
