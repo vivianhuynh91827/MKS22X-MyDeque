@@ -15,9 +15,6 @@ public class MyDeque<E> {
 
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity) {
-    if (initialCapacity <= 0) {
-      throw new IllegalArgumentException("initialCapacity must be greater than 0");
-    }
     data = (E[])new Object[initialCapacity];
     size = 0;
     start = 0;
@@ -50,15 +47,15 @@ public class MyDeque<E> {
     }
     s = s.substring(0, s.length()-1); //remove extra space
     s += "}"; //close lise
-    System.out.println();
-    System.out.println("First: " + getFirst());
-    System.out.println("Last : " + getLast());
+    // System.out.println();
+    // System.out.println("First: " + getFirst());
+    // System.out.println("Last : " + getLast());
     return s;
   }
 
   public void addFirst(E element) {
     if (element == null) {
-      throw new IllegalArgumentException("null cannot be added");
+      throw new NullPointerException();
     }
     // System.out.println(element);
     //if start is at the beginning and there is space at the end of the array
@@ -90,7 +87,7 @@ public class MyDeque<E> {
 
   public void addLast(E element) {
     if (element == null) {
-      throw new IllegalArgumentException("null cannot be added");
+      throw new NullPointerException();
     }
     //if end is at the end of the array and there is space in the beginning of the array
     if (end == data.length -1 && data[0] == null) {
@@ -147,12 +144,30 @@ public class MyDeque<E> {
     return resized;
   }
 
-  // public E removeFirst(){
-  //
-  // }
-  //
+  public E removeFirst(){
+    if (size == 0) {
+      throw new NoSuchElementException();
+    }
+    E value = data[start];
+    data[start] = null;
+    size--;
+    if (size ==0 || size == 1) {
+      start = end;
+    }
+    else if (start == data.length-1) {
+      start = 0;
+    }
+    else {
+      start ++;
+    }
+    return value;
+  }
+
   // public E removeLast(){
   //
+  // if (size == 0) {
+  //   throw new NoSuchElementException("deque is empty");
+  // }
   // }
 
   public E getFirst(){
@@ -197,6 +212,7 @@ public class MyDeque<E> {
       System.out.println(test);
       test.addLast(-5);
       System.out.println(test);
+      test.addFirst(null);
       // System.out.println();
       // System.out.println("size: " +test.size());
       // System.out.println("First: " + test.getFirst());
