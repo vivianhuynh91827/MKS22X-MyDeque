@@ -45,7 +45,6 @@ public class MyDeque<E> {
         i++;
       }
     }
-    s = s.substring(0, s.length()-1); //remove extra space
     s += "}"; //close lise
     // System.out.println();
     // System.out.println("First: " + getFirst());
