@@ -5,7 +5,7 @@ public class Calculator {
   public static double eval(String s) {
     Scanner in = new Scanner(s);
     @SuppressWarnings("unchecked")
-    MyDeque<Double> stack = new MyDeque();
+    MyDeque<Double> stack = new MyDeque<>();
     String cur = "";
     while (in.hasNext()) {
       cur = in.next();
@@ -42,6 +42,6 @@ public class Calculator {
   }
 
   public static void main(String[] args) {
-    System.out.println(eval("1 42 - 3 4 5 + * +"));
+    System.out.println(eval("2 4 71 8.5 + - * 5 +"));
   }
 }
